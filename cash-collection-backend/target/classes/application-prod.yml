@@ -1,0 +1,118 @@
+#firstmutual:
+#  fmllife:
+#    paynow:
+#      integration:
+#        id: '16814'
+#        key: 991aaa4d-49ee-4a6e-af34-96a33250e727
+#  fmlhealth:
+#    paynow:
+#      integration:
+#        id: '16814'
+#        key: 991aaa4d-49ee-4a6e-af34-96a33250e727
+#  health:
+#    provider:
+#      activationMessage:
+#        email:
+#          body: 'First Mutual Health activation code for @PayeeName is : @OTP '
+#          from: 'webclaims@firstmutualhealth.co.zw '
+#          subject: 'First Mutual Health - USSD Activation Code '
+#          bcc: 'info@firstmutualhealth.co.zw '
+#        nodeValue: 'First Mutual Health activation code for @PayeeName is : @OTP '
+#    claims:
+#      email:
+#        SMTP:
+#          password: firefox!7
+#          user: webclaims@firstmutualhealth.co.zw
+#        SMTPServer: localhost
+#        fromAddress: webclaims@firstmutualhealth.co.zw
+#      member:
+#        serviceMessage: 'First Mutual Health Authorisation PIN for services rendered
+#          at @PayeeName , on date : @Date is : @OTP '
+#    welcome:
+#      message: 'Dear @FirstName Welcome to First Mutual Health,your membership number
+#        is : @MemberNumber .'
+#    subscription:
+#      gateway:
+#        url: http://127.0.0.1:9002/subscriptions/health/
+#  sms:
+#    gateway:
+#      password: cs8GGcjW
+#      username: fmlapi
+#      url: https://mobile.esolutions.co.zw/bmg/api/single/
+#      originator: FML
+#  payment:
+#    gateway:
+#      netone:
+#        url: http://127.0.0.1:9007/netone-payments/push/
+#      currency: RTGS
+#      url: http://127.0.0.1:9002/payments/
+#      username: nocloud
+#      password: open1985!
+#      telecel:
+#        url: http://127.0.0.1:9002/telecel-payments/push/
+#  router:
+#    update:
+#      url: http://127.0.0.1:1980/ussd-router/set-route/
+#  life:
+#    web:
+#      services:
+#        token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjA3NzIxMjAyNTYiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9tb2JpbGVwaG9uZSI6IlRlc3Q5IFRlc3RzdXJuYW1lIiwibmJmIjoxNjExODQ1OTg3LCJleHAiOjE4NzEwNDU5ODcsImlhdCI6MTYxMTg0NTk4N30.kEW7RY8bZ_ua5wrun0RWjVYaCQfIPLTB-oVNKJMKnwE
+#        url: http://mobile.firstmutual.co.zw:9016/policy/create
+#    subscription:
+#      gateway:
+#        url: http://127.0.0.1:9002/subscriptions/health/
+#spring:
+#  jpa:
+#    properties:
+#      hibernate:
+#        dialect:
+#          storage_engine: innodb
+#          nodeValue: org.hibernate.dialect.MySQL5InnoDBDialect
+#        current_session_context_class: org.springframework.orm.hibernate5.SpringSessionContext
+#        hbm2ddl:
+#          auto: update
+#      max_allowed_packet: '2000'
+#    hibernate:
+#      ddl-auto: update
+#    database-platform: org.hibernate.dialect.MySQL5Dialect
+#    show-sql: 'true'
+#
+#
+#  application:
+#    name: cash-collection
+#  datasource:
+#    password: "foxcode*7Live."
+#    url: jdbc:mysql://10.1.4.4:3306/cash_collection?createDatabaseIfNotExist=true&useSSL=false&autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&failOverReadOnly=false&allowMultiQueries=true&serverTimezone=Africa/Harare&allowPublicKeyRetrieval=true&useUnicode=true&character_set_server=utf8mb4
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    username:  code
+#  main:
+#    allow-bean-definition-overriding: 'true'
+#  security:
+#    enabled: 'false'
+##second:
+##  datasource:
+##    password: system@2009
+##    username: sa
+##    url: jdbc:sqlserver://fmlexergydbsrv.firstmutual.co.zw;databaseName=fml_mobile;sslProtocol=TLSv1.2
+#  spring:
+#    datasource:
+#      driverClassName: com.sqlserver.jdbc.SQLServerDriver
+#
+#
+#  hystrix:
+#    enabled: 'false '
+#security:
+#  oauth2:
+#    client:
+#      client-secret: RobTheRich
+#      client-id: life-services-econet
+#  ignored: /**
+#  basic:
+#    enabled: 'true'
+#telecel:
+#  ussd:
+#    user: FirstMutual
+#    password: mut12fir
+#    port: '2775'
+#    ipaddress: 192.168.240.5
+#    queName: test

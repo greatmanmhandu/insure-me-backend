@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: life-form
+  profiles:
+    active: dev
+
+app-name: "life-form"
+
+product:
+  name: LIFE-FORM
+
+server:
+  port: 6117

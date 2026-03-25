@@ -1,0 +1,190 @@
+version: '3'
+services:
+  gateway-service:
+    container_name: web-gateway-service
+    image: web-gateway-service
+    build:
+      context: ./gateway
+      dockerfile: Dockerfile
+    depends_on:
+      - web-registry-service
+    ports:
+      - "6980:6980"
+    restart: always
+    networks:
+      - hcp-web-network
+    sysctls:
+      - net.ipv4.tcp_keepalive_intvl=45
+      - net.ipv4.tcp_keepalive_probes=15
+      - net.ipv4.tcp_keepalive_time=295
+#    volumes:
+#      - gateway-service:/data/gateway-service
+
+
+  web-registry-service:
+    container_name: web-registry-service
+    image: web-registry-service
+    build:
+      context: ./registry
+      dockerfile: Dockerfile
+    ports:
+      - "6761:6761"
+    restart: always
+    networks:
+      - hcp-web-network
+    sysctls:
+      - net.ipv4.tcp_keepalive_intvl=45
+      - net.ipv4.tcp_keepalive_probes=15
+      - net.ipv4.tcp_keepalive_time=295
+#    volumes:
+#      - registry:/data/registry-service
+
+  user-service:
+    image: hcp-user-service
+    build:
+      context: ./user-service
+      dockerfile: Dockerfile
+    depends_on:
+      - web-registry-service
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://10.1.4.4:3306/hcp_ussd?createDatabaseIfNotExist=true&autoReconnect=true&useSSL=false
+      - SPRING_DATASOURCE_USERNAME=dev_user
+      - SPRING_DATASOURCE_PASSWORD=Foxcode@7
+    ports:
+      - "6101:6101"
+    restart: always
+    networks:
+      - hcp-web-network
+    sysctls:
+      - net.ipv4.tcp_keepalive_intvl=45
+      - net.ipv4.tcp_keepalive_probes=15
+      - net.ipv4.tcp_keepalive_time=295
+    volumes:
+      - user-service:/data/user-service
+
+
+
+  hcp-web-service:
+    image: hcp-web-core-service
+    build:
+      context: ./hcp-web-core
+      dockerfile: Dockerfile
+    depends_on:
+      - web-registry-service
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://10.1.4.4:3306/hcp_ussd?createDatabaseIfNotExist=true&autoReconnect=true&useSSL=false
+      - SPRING_DATASOURCE_USERNAME=dev_user
+      - SPRING_DATASOURCE_PASSWORD=Foxcode@7
+    ports:
+      - "6102:6102"
+    restart: always
+    networks:
+      - hcp-web-network
+    sysctls:
+      - net.ipv4.tcp_keepalive_intvl=45
+      - net.ipv4.tcp_keepalive_probes=15
+      - net.ipv4.tcp_keepalive_time=295
+    volumes:
+      - hcp-web-core:/data/hcp-web-core-service
+
+  life-web-service:
+    image: life-web-core-service
+    build:
+      context: ./life-web-core
+      dockerfile: Dockerfile
+    depends_on:
+      - web-registry-service
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://10.1.4.4:3306/life_ussd?createDatabaseIfNotExist=true&autoReconnect=true&useSSL=false
+      - SPRING_DATASOURCE_USERNAME=dev_user
+      - SPRING_DATASOURCE_PASSWORD=Foxcode@7
+    ports:
+      - "6103:6103"
+    restart: always
+    networks:
+      - hcp-web-network
+    sysctls:
+      - net.ipv4.tcp_keepalive_intvl=45
+      - net.ipv4.tcp_keepalive_probes=15
+      - net.ipv4.tcp_keepalive_time=295
+    volumes:
+      - life-web-core:/data/life-web-core-service
+
+  microfinance-web-core:
+    image: microfinance-web-core
+    build:
+      context: ./microfinance-web-core
+      dockerfile: Dockerfile
+    depends_on:
+      - web-registry-service
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://10.1.4.4:3306/holdings_mobile_test?createDatabaseIfNotExist=true&autoReconnect=true&useSSL=false
+      - SPRING_DATASOURCE_USERNAME=dev_user
+      - SPRING_DATASOURCE_PASSWORD=Foxcode@7
+    ports:
+      - "6108:6108"
+    restart: always
+    networks:
+      - hcp-web-network
+    sysctls:
+      - net.ipv4.tcp_keepalive_intvl=45
+      - net.ipv4.tcp_keepalive_probes=15
+      - net.ipv4.tcp_keepalive_time=295
+    volumes:
+      - microfinance-web-core:/data/microfinance-web-core
+
+  health-web-service:
+    image: health-web-core-service
+    build:
+      context: ./health-web-core
+      dockerfile: Dockerfile
+    depends_on:
+      - web-registry-service
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://10.1.4.4:3306/health_ussd?createDatabaseIfNotExist=true&autoReconnect=true&useSSL=false
+      - SPRING_DATASOURCE_USERNAME=code
+      - SPRING_DATASOURCE_PASSWORD=foxcode*7Live.
+    ports:
+      - "6105:6105"
+    restart: always
+    networks:
+      - hcp-web-network
+    sysctls:
+      - net.ipv4.tcp_keepalive_intvl=45
+      - net.ipv4.tcp_keepalive_probes=15
+      - net.ipv4.tcp_keepalive_time=295
+    volumes:
+      - health-web-core:/data/health-web-core-service
+
+  health-service-web-core:
+    image: health-service-web-core
+    build:
+      context: ./health-service-web-core
+      dockerfile: Dockerfile
+    depends_on:
+      - web-registry-service
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://172.16.8.91:3306/holdings_mobile_test
+      - SPRING_DATASOURCE_USERNAME=code
+      - SPRING_DATASOURCE_PASSWORD=foxcode*7Live.
+    ports:
+      - "6104:6104"
+    restart: always
+    networks:
+      - hcp-web-network
+    sysctls:
+      - net.ipv4.tcp_keepalive_intvl=45
+      - net.ipv4.tcp_keepalive_probes=15
+      - net.ipv4.tcp_keepalive_time=295
+    volumes:
+      - health-service-web-core:/data/health-service-web-core-service
+networks:
+  hcp-web-network:
+volumes:
+  mysqldb:
+  user-service:
+  hcp-web-core:
+  life-web-core:
+  microfinance-web-core:
+  health-service-web-core:
+  health-web-core:

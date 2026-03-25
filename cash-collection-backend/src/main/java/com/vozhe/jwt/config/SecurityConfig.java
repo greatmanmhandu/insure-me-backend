@@ -1,0 +1,170 @@
+package com.vozhe.jwt.config;
+
+import com.vozhe.jwt.dashboard_and_mobile.service.Impl.UserServiceImpl;
+import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+
+//@Configuration
+//@EnableWebSecurity
+//@RequiredArgsConstructor
+//public class SecurityConfig extends WebSecurityConfigurerAdapter {
+//
+//    private final UserServiceImpl userDetailsService;
+//
+//    @Override
+//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoderBean());
+//    }
+//
+//    @Override
+//    protected void configure(HttpSecurity httpSecurity) throws Exception {
+//        httpSecurity
+//                .csrf().disable()
+//                .authorizeRequests()
+//                .antMatchers("/**").permitAll()
+//                .anyRequest().authenticated()
+//                .and()
+//                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+//    }
+//
+//    @Bean
+//    public PasswordEncoder passwordEncoderBean() {
+//        return new BCryptPasswordEncoder();
+//    }
+//
+//    @Override
+//    @Bean
+//    public AuthenticationManager authenticationManagerBean() throws Exception {
+//        return super.authenticationManagerBean();
+//    }
+//}
+
+//@Configuration
+//@EnableWebSecurity
+//@RequiredArgsConstructor
+//public class SecurityConfig extends WebSecurityConfigurerAdapter {
+//
+//    private final UserServiceImpl userDetailsService;
+//
+//    private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+//
+//    private final JwtRequestFilter jwtRequestFilter;
+//
+//
+//    private static final String[] AUTH_WHITELIST = {
+//            // -- swagger ui
+//            "/swagger-resources/**",
+//            "/swagger-ui.html",
+//            "/api/authenticate/",
+//            "/whitelist/**"
+//    };
+//
+//    @Override
+//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoderBean());
+//    }
+//
+//    @Override
+//    protected void configure(HttpSecurity httpSecurity) throws Exception {
+//
+//        httpSecurity.csrf().disable()
+//                .authorizeRequests()
+//                .antMatchers(AUTH_WHITELIST)
+//                .permitAll()
+//                .anyRequest()
+//                .authenticated()
+//                .and()
+//                .cors()
+//                .and()
+//                .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
+//                .and()
+//                .sessionManagement()
+//                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+//
+//        // Add a filter to validate the tokens with every request
+//        httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+//    }
+//
+//    @Bean
+//    public PasswordEncoder passwordEncoderBean() {
+//        return new BCryptPasswordEncoder();
+//    }
+//
+//    @Bean
+//    @Override
+//    public AuthenticationManager authenticationManagerBean() throws Exception {
+//        return super.authenticationManagerBean();
+//    }
+//
+//}
+
+
+@Configuration
+@EnableWebSecurity
+@RequiredArgsConstructor
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+    private final UserServiceImpl userDetailsService;
+
+    private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+
+    private final JwtRequestFilter jwtRequestFilter;
+
+
+    private static final String[] AUTH_WHITELIST = {
+            // -- swagger ui
+            "/swagger-resources/**",
+            "/swagger-ui.html",
+            "/api/authenticate/",
+            "/whitelist/**"
+    };
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoderBean());
+    }
+
+    @Override
+    protected void configure(HttpSecurity httpSecurity) throws Exception {
+
+        httpSecurity.csrf().disable()
+                .authorizeRequests()
+                .antMatchers(AUTH_WHITELIST)
+                .permitAll()
+                .anyRequest()
+                .authenticated()
+                .and()
+                .cors()
+                .and()
+                .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
+                .and()
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
+        // Add a filter to validate the tokens with every request
+        httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoderBean() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
+
+}

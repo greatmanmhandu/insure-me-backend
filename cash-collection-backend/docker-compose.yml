@@ -1,0 +1,28 @@
+version: '3'
+services:
+  cash-collection-service:
+    image: cash-collection-service
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://10.1.4.4:3306/cash_collection_live?createDatabaseIfNotExist=true&autoReconnect=true&useSSL=false
+      - SPRING_DATASOURCE_USERNAME=code
+      - SPRING_DATASOURCE_PASSWORD=foxcode*7Live.
+    ports:
+      - "6109:6109"
+    restart: always
+    networks:
+      - hcp-web-network
+    sysctls:
+      - net.ipv4.tcp_keepalive_intvl=45
+      - net.ipv4.tcp_keepalive_probes=15
+      - net.ipv4.tcp_keepalive_time=295
+    volumes:
+      - cash-collection-service:/data/cash-collection-service
+
+networks:
+  hcp-web-network:
+
+volumes:
+  cash-collection-service:

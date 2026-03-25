@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="registry" />
+        <module name="life-web-core" />
+        <module name="pointstracker-web-core" />
+        <module name="life-web-form" />
+        <module name="life-web-form-dashboard" />
+        <module name="user-service" />
+        <module name="health-service-web-core" />
+        <module name="microfinance-web-core" />
+        <module name="health-web-core" />
+        <module name="hcp-web-core" />
+        <module name="hcp-web-commons" />
+        <module name="gateway" />
+        <module name="customer-feedback" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="customer-feedback" options="-parameters" />
+      <module name="gateway" options="-parameters" />
+      <module name="hcp-web" options="" />
+      <module name="hcp-web-commons" options="-parameters" />
+      <module name="hcp-web-core" options="-parameters" />
+      <module name="health-service-web-core" options="-parameters" />
+      <module name="health-web-core" options="-parameters" />
+      <module name="life-web-core" options="-parameters" />
+      <module name="life-web-form" options="-parameters" />
+      <module name="life-web-form-dashboard" options="-parameters" />
+      <module name="microfinance-web-core" options="-parameters" />
+      <module name="pointstracker-web-core" options="-parameters" />
+      <module name="registry" options="-parameters" />
+      <module name="user-service" options="-parameters" />
+    </option>
+  </component>
+</project>
