@@ -37,16 +37,8 @@
         <module>registry</module>
         <module>gateway</module>
         <module>user-service</module>
-        <module>hcp-web-commons</module>
-        <module>hcp-web-core</module>
-        <module>life-web-core</module>
-        <module>customer-feedback</module>
-        <module>life-web-form</module>
-        <module>health-service-web-core</module>
-        <module>health-web-core</module>
-        <module>microfinance-web-core</module>
-        <module>life-web-form-dashboard</module>
-        <module>pointstracker-web-core</module>
+        <module>core-commons</module>
+        <module>new-business</module>
         <module>premium-receipting</module>
     </modules>
 </project>
