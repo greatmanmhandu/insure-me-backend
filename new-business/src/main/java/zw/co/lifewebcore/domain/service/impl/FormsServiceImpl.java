@@ -664,16 +664,20 @@ public NewBusinessFuneralForEfmlandELP saveNewBusinessFuneralForEfmlandELPServic
         List<NewBusinessFuneralForEfmlandELP> allData =
                 newBusinessFuneralForEfmlandELPRepository.findByCreatedDateBetweenOrderByIdAsc(startDate, endDate);
 
-        // Group by linkName (Identifier)
-        Map<String, List<NewBusinessFuneralForEfmlandELP>> groupedByLinkName = allData.stream()
+        // Group by linkName AND createdDate (truncated to seconds to ensure they belong to the same submission)
+        Map<String, List<NewBusinessFuneralForEfmlandELP>> groupedData = allData.stream()
                 .filter(record -> record.getLinkName() != null && !record.getLinkName().isEmpty())
-                .collect(Collectors.groupingBy(NewBusinessFuneralForEfmlandELP::getLinkName));
+                .collect(Collectors.groupingBy(record -> {
+                    // Create a composite key: linkName + timestamp (truncated to seconds)
+                    long epochSecond = record.getCreatedDate().getEpochSecond();
+                    return record.getLinkName() + "_" + epochSecond;
+                }));
 
         List<NewBusinessFuneralGroupedDto> result = new ArrayList<>();
         Set<Long> processedIds = new HashSet<>();
 
-        // Handle records WITH linkName
-        groupedByLinkName.forEach((linkName, records) -> {
+        // Handle grouped records
+        groupedData.forEach((key, records) -> {
             // Find main record (the one with mobile is usually the main member)
             NewBusinessFuneralForEfmlandELP mainRecord = records.stream()
                     .filter(r -> r.getMobile() != null && !r.getMobile().isEmpty())
@@ -701,6 +705,61 @@ public NewBusinessFuneralForEfmlandELP saveNewBusinessFuneralForEfmlandELPServic
                 .filter(record -> !processedIds.contains(record.getId()))
                 .forEach(record -> {
                     result.add(NewBusinessFuneralGroupedDto.builder()
+                            .mainRecord(record)
+                            .dependants(new ArrayList<>())
+                            .build());
+                });
+
+        return CompletableFuture.completedFuture(result);
+    }
+
+    @Async
+    @Override
+    public CompletableFuture<List<ConversionFuneralGroupedDto>> getGroupedConversionForFuneralProducts(String startDateStr, String endDateStr) {
+        Instant startDate = parseToInstant(startDateStr, true);
+        Instant endDate = parseToInstant(endDateStr, false);
+        List<ConversionForFuneralProducts> allData =
+                conversionForFuneralProductsRepository.findByCreatedDateBetweenOrderByIdAsc(startDate, endDate);
+
+        // Group by linkName AND createdDate (truncated to seconds)
+        Map<String, List<ConversionForFuneralProducts>> groupedData = allData.stream()
+                .filter(record -> record.getLinkName() != null && !record.getLinkName().isEmpty())
+                .collect(Collectors.groupingBy(record -> {
+                    long epochSecond = record.getCreatedDate().getEpochSecond();
+                    return record.getLinkName() + "_" + epochSecond;
+                }));
+
+        List<ConversionFuneralGroupedDto> result = new ArrayList<>();
+        Set<Long> processedIds = new HashSet<>();
+
+        groupedData.forEach((key, records) -> {
+            // Find main record
+            ConversionForFuneralProducts mainRecord = records.stream()
+                    .filter(r -> r.getMobile() != null && !r.getMobile().isEmpty())
+                    .filter(r -> "SELF".equalsIgnoreCase(r.getRelationShip()))
+                    .findFirst()
+                    .orElse(records.stream()
+                            .filter(r -> r.getMobile() != null && !r.getMobile().isEmpty())
+                            .findFirst()
+                            .orElse(records.get(0)));
+
+            List<ConversionForFuneralProducts> dependants = records.stream()
+                    .filter(r -> r.getId() != mainRecord.getId())
+                    .collect(Collectors.toList());
+
+            result.add(ConversionFuneralGroupedDto.builder()
+                    .mainRecord(mainRecord)
+                    .dependants(dependants)
+                    .build());
+            
+            records.forEach(r -> processedIds.add(r.getId()));
+        });
+
+        // Handle records without linkName or not processed
+        allData.stream()
+                .filter(record -> !processedIds.contains(record.getId()))
+                .forEach(record -> {
+                    result.add(ConversionFuneralGroupedDto.builder()
                             .mainRecord(record)
                             .dependants(new ArrayList<>())
                             .build());

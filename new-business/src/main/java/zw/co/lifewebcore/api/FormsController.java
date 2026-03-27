@@ -8,6 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import zw.co.hcpwebcommons.api.ApiResponse;
+import zw.co.lifewebcore.domain.dto.ConversionFuneralGroupedDto;
 import zw.co.lifewebcore.domain.dto.GenericParentDto;
 import zw.co.lifewebcore.domain.dto.GenericParentImbaDto;
 import zw.co.lifewebcore.domain.dto.GenericParentMombeDto;
@@ -178,6 +179,19 @@ public class FormsController {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
+        return new ResponseEntity<>(data, headers, HttpStatus.OK);
+    }
+
+    @GetMapping("/get/groupedConversionForFuneralProducts")
+    @ApiOperation(value = "get grouped conversion funeral data")
+    public ResponseEntity<List<ConversionFuneralGroupedDto>> getGroupedConversionForFuneralProducts(
+            @RequestParam("startDate") String startDate,
+            @RequestParam("endDate") String endDate
+    ) {
+        CompletableFuture<List<ConversionFuneralGroupedDto>> dataFuture = formsService.getGroupedConversionForFuneralProducts(startDate, endDate);
+        List<ConversionFuneralGroupedDto> data = dataFuture.join();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
         return new ResponseEntity<>(data, headers, HttpStatus.OK);
     }
 

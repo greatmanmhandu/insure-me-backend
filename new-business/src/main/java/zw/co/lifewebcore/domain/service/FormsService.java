@@ -2,6 +2,7 @@ package zw.co.lifewebcore.domain.service;
 
 import zw.co.lifewebcore.domain.dto.GenericParentDto;
 import zw.co.lifewebcore.domain.dto.GenericParentImbaDto;
+import zw.co.lifewebcore.domain.dto.ConversionFuneralGroupedDto;
 import zw.co.lifewebcore.domain.dto.GenericParentMombeDto;
 import zw.co.lifewebcore.domain.dto.NewBusinessFuneralGroupedDto;
 import zw.co.lifewebcore.domain.model.*;
@@ -37,6 +38,8 @@ public interface FormsService {
     CompletableFuture<List<NewbusinessForSavings>> getNewbusinessForSavings(String startDate,String endDate);
 
     CompletableFuture<List<ConversionForFuneralProducts>> getConversionForFuneralProducts(String startDate,String endDate);
+
+    CompletableFuture<List<ConversionFuneralGroupedDto>> getGroupedConversionForFuneralProducts(String startDate, String endDate);
 
     ImbaProduct saveImba(GenericParentImbaDto genericParentImbaDto);
 
