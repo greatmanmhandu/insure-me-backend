@@ -19,8 +19,9 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.CompletableFuture;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -653,6 +654,59 @@ public NewBusinessFuneralForEfmlandELP saveNewBusinessFuneralForEfmlandELPServic
         List<MombeProduct> data =
                 mombeProductRepository.findByCreatedDateBetweenOrderByIdAsc(startDate, endDate);
         return CompletableFuture.completedFuture(data);
+    }
+
+    @Async
+    @Override
+    public CompletableFuture<List<NewBusinessFuneralGroupedDto>> getGroupedNewBusinessFuneralForEfmlandELP(String startDateStr, String endDateStr) {
+        Instant startDate = parseToInstant(startDateStr, true);
+        Instant endDate = parseToInstant(endDateStr, false);
+        List<NewBusinessFuneralForEfmlandELP> allData =
+                newBusinessFuneralForEfmlandELPRepository.findByCreatedDateBetweenOrderByIdAsc(startDate, endDate);
+
+        // Group by linkName (Identifier)
+        Map<String, List<NewBusinessFuneralForEfmlandELP>> groupedByLinkName = allData.stream()
+                .filter(record -> record.getLinkName() != null && !record.getLinkName().isEmpty())
+                .collect(Collectors.groupingBy(NewBusinessFuneralForEfmlandELP::getLinkName));
+
+        List<NewBusinessFuneralGroupedDto> result = new ArrayList<>();
+        Set<Long> processedIds = new HashSet<>();
+
+        // Handle records WITH linkName
+        groupedByLinkName.forEach((linkName, records) -> {
+            // Find main record (the one with mobile is usually the main member)
+            NewBusinessFuneralForEfmlandELP mainRecord = records.stream()
+                    .filter(r -> r.getMobile() != null && !r.getMobile().isEmpty())
+                    .filter(r -> "SELF".equalsIgnoreCase(r.getRelationShip()))
+                    .findFirst()
+                    .orElse(records.stream()
+                            .filter(r -> r.getMobile() != null && !r.getMobile().isEmpty())
+                            .findFirst()
+                            .orElse(records.get(0)));
+
+            List<NewBusinessFuneralForEfmlandELP> dependants = records.stream()
+                    .filter(r -> r.getId() != mainRecord.getId())
+                    .collect(Collectors.toList());
+
+            result.add(NewBusinessFuneralGroupedDto.builder()
+                    .mainRecord(mainRecord)
+                    .dependants(dependants)
+                    .build());
+            
+            records.forEach(r -> processedIds.add(r.getId()));
+        });
+
+        // Handle records WITHOUT mobile or not processed (treat as main records with no dependants)
+        allData.stream()
+                .filter(record -> !processedIds.contains(record.getId()))
+                .forEach(record -> {
+                    result.add(NewBusinessFuneralGroupedDto.builder()
+                            .mainRecord(record)
+                            .dependants(new ArrayList<>())
+                            .build());
+                });
+
+        return CompletableFuture.completedFuture(result);
     }
 
     public Instant parseToInstant(String dateStr, boolean startOfDay) {

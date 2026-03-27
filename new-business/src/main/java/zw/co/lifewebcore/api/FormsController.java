@@ -11,6 +11,7 @@ import zw.co.hcpwebcommons.api.ApiResponse;
 import zw.co.lifewebcore.domain.dto.GenericParentDto;
 import zw.co.lifewebcore.domain.dto.GenericParentImbaDto;
 import zw.co.lifewebcore.domain.dto.GenericParentMombeDto;
+import zw.co.lifewebcore.domain.dto.NewBusinessFuneralGroupedDto;
 import zw.co.lifewebcore.domain.model.*;
 import zw.co.lifewebcore.domain.service.FormsService;
 import zw.co.lifewebcore.request.MemberDto;
@@ -25,13 +26,6 @@ import java.util.concurrent.CompletableFuture;
 public class FormsController {
 
     private final FormsService formsService;
-//    @PostMapping("/save/newBusinessFuneralForEfmlandELP")
-//    @ApiOperation(value = "post")
-//    public ApiResponse newBusinessFuneralForEfmlandELP(@RequestBody GenericParentDto memberDto) {
-//        NewBusinessFuneralForEfmlandELP newBusinessFuneralForEfmlandELP = formsService.saveNewBusinessFuneralForEfmlandELPService(memberDto);
-//        return new ApiResponse(HttpStatus.OK.value(), HttpStatus.OK.name(), newBusinessFuneralForEfmlandELP );
-//    }
-
     @PostMapping("/save/newBusinessFuneralForEfmlandELP")
     @ApiOperation(value = "post")
     public ApiResponse newBusinessFuneralForEfmlandELP(@RequestBody MemberDto memberDto) {
@@ -86,6 +80,19 @@ public class FormsController {
         CompletableFuture<List<NewBusinessFuneralForEfmlandELP>> dataFuture = formsService.getNewBusinessFuneralForEfmlandELP(startDate, endDate);
         // Use join() instead of get() to avoid checked exceptions
         List<NewBusinessFuneralForEfmlandELP> data = dataFuture.join();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        return new ResponseEntity<>(data, headers, HttpStatus.OK);
+    }
+
+    @GetMapping("/get/groupedNewBusinessFuneralForEfmlandELP")
+    @ApiOperation(value = "get grouped funeral data")
+    public ResponseEntity<List<NewBusinessFuneralGroupedDto>> getGroupedNewBusinessFuneralForEfmlandELP(
+            @RequestParam("startDate") String startDate,
+            @RequestParam("endDate") String endDate
+    ) {
+        CompletableFuture<List<NewBusinessFuneralGroupedDto>> dataFuture = formsService.getGroupedNewBusinessFuneralForEfmlandELP(startDate, endDate);
+        List<NewBusinessFuneralGroupedDto> data = dataFuture.join();
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         return new ResponseEntity<>(data, headers, HttpStatus.OK);

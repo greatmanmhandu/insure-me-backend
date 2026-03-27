@@ -1,0 +1,127 @@
+2026-03-27 08:13:34.388  INFO 13836 --- [restartedMain] z.c.f.u.UserServiceApplication           : Starting UserServiceApplication using Java 17.0.9 on FH-GMhandu1123 with PID 13836 (C:\actual-fml-projects\life-core\insure-me-backend\user-service\target\classes started by GMhandu in C:\actual-fml-projects\life-core\insure-me-backend)
+2026-03-27 08:13:34.400  INFO 13836 --- [restartedMain] z.c.f.u.UserServiceApplication           : The following profiles are active: dev
+2026-03-27 08:13:34.546  INFO 13836 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-03-27 08:13:34.547  INFO 13836 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-03-27 08:13:37.368  INFO 13836 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-03-27 08:13:37.642  INFO 13836 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 251 ms. Found 6 JPA repository interfaces.
+2026-03-27 08:13:38.386  INFO 13836 --- [restartedMain] o.s.cloud.context.scope.GenericScope     : BeanFactory id=46ef0564-5058-3658-99be-a4ddad33a77b
+2026-03-27 08:13:38.842  INFO 13836 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@b0cad45' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2026-03-27 08:13:38.850  INFO 13836 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2026-03-27 08:13:39.963  INFO 13836 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 6101 (http)
+2026-03-27 08:13:39.993  INFO 13836 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-03-27 08:13:39.994  INFO 13836 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.52]
+2026-03-27 08:13:40.318  INFO 13836 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-03-27 08:13:40.318  INFO 13836 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 5770 ms
+2026-03-27 08:13:40.570  WARN 13836 --- [restartedMain] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2026-03-27 08:13:40.571  INFO 13836 --- [restartedMain] c.n.c.sources.URLConfigurationSource     : To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2026-03-27 08:13:40.599  INFO 13836 --- [restartedMain] c.netflix.config.DynamicPropertyFactory  : DynamicPropertyFactory is initialized with configuration sources: com.netflix.config.ConcurrentCompositeConfiguration@23b4c24
+2026-03-27 08:13:40.966  WARN 13836 --- [restartedMain] o.s.c.openfeign.FeignClientFactoryBean   : The provided URL is empty. Will try picking an instance via load-balancing.
+2026-03-27 08:13:41.402  WARN 13836 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-03-27 08:13:42.610  INFO 13836 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-03-27 08:13:43.191  INFO 13836 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-03-27 08:13:46.219  INFO 13836 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-03-27 08:13:46.361  INFO 13836 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2026-03-27 08:13:47.591  INFO 13836 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/'] with []
+2026-03-27 08:13:50.163  INFO 13836 --- [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 18 endpoint(s) beneath base path '/actuator'
+2026-03-27 08:13:50.201  INFO 13836 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@262944e1, org.springframework.security.web.context.SecurityContextPersistenceFilter@4ec5c2cb, org.springframework.security.web.header.HeaderWriterFilter@12eab6b8, org.springframework.web.filter.CorsFilter@36a93f6b, org.springframework.security.web.authentication.logout.LogoutFilter@5a84fd5f, zw.co.hcpwebcommons.handler.ExceptionHandlerFilter@73f32e76, zw.co.hcpwebcommons.security.JWTAuthenticationFilter@955215b, zw.co.hcpwebcommons.security.JWTAuthenticationFilter@4a5d1f94, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@1914c699, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@429d61fc, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@374c8dd9, org.springframework.security.web.session.SessionManagementFilter@5a09e752, org.springframework.security.web.access.ExceptionTranslationFilter@ed99924, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@7b6d7fb0]
+2026-03-27 08:13:50.241  WARN 13836 --- [restartedMain] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2026-03-27 08:13:50.242  INFO 13836 --- [restartedMain] c.n.c.sources.URLConfigurationSource     : To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2026-03-27 08:13:51.315  INFO 13836 --- [restartedMain] DiscoveryClientOptionalArgsConfiguration : Eureka HTTP Client uses Jersey
+2026-03-27 08:13:51.448  WARN 13836 --- [restartedMain] iguration$LoadBalancerCaffeineWarnLogger : Spring Cloud LoadBalancer is currently working with the default cache. You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2026-03-27 08:13:51.516  INFO 13836 --- [restartedMain] o.s.c.n.eureka.InstanceInfoFactory       : Setting initial instance status as: STARTING
+2026-03-27 08:13:51.704  INFO 13836 --- [restartedMain] com.netflix.discovery.DiscoveryClient    : Initializing Eureka in region us-east-1
+2026-03-27 08:13:52.009  INFO 13836 --- [restartedMain] c.n.d.provider.DiscoveryJerseyProvider   : Using JSON encoding codec LegacyJacksonJson
+2026-03-27 08:13:52.010  INFO 13836 --- [restartedMain] c.n.d.provider.DiscoveryJerseyProvider   : Using JSON decoding codec LegacyJacksonJson
+2026-03-27 08:13:52.518  INFO 13836 --- [restartedMain] c.n.d.provider.DiscoveryJerseyProvider   : Using XML encoding codec XStreamXml
+2026-03-27 08:13:52.518  INFO 13836 --- [restartedMain] c.n.d.provider.DiscoveryJerseyProvider   : Using XML decoding codec XStreamXml
+2026-03-27 08:13:53.051  INFO 13836 --- [restartedMain] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2026-03-27 08:13:53.093  INFO 13836 --- [restartedMain] com.netflix.discovery.DiscoveryClient    : Disable delta property : false
+2026-03-27 08:13:53.094  INFO 13836 --- [restartedMain] com.netflix.discovery.DiscoveryClient    : Single vip registry refresh property : null
+2026-03-27 08:13:53.094  INFO 13836 --- [restartedMain] com.netflix.discovery.DiscoveryClient    : Force full registry fetch : false
+2026-03-27 08:13:53.094  INFO 13836 --- [restartedMain] com.netflix.discovery.DiscoveryClient    : Application is null : false
+2026-03-27 08:13:53.094  INFO 13836 --- [restartedMain] com.netflix.discovery.DiscoveryClient    : Registered Applications size is zero : true
+2026-03-27 08:13:53.094  INFO 13836 --- [restartedMain] com.netflix.discovery.DiscoveryClient    : Application version is -1: true
+2026-03-27 08:13:53.094  INFO 13836 --- [restartedMain] com.netflix.discovery.DiscoveryClient    : Getting all instance registry info from the eureka server
+2026-03-27 08:13:53.264  INFO 13836 --- [restartedMain] com.netflix.discovery.DiscoveryClient    : The response status is 200
+2026-03-27 08:13:53.272  INFO 13836 --- [restartedMain] com.netflix.discovery.DiscoveryClient    : Starting heartbeat executor: renew interval is: 1
+2026-03-27 08:13:53.284  INFO 13836 --- [restartedMain] c.n.discovery.InstanceInfoReplicator     : InstanceInfoReplicator onDemand update allowed rate per min is 4
+2026-03-27 08:13:53.291  INFO 13836 --- [restartedMain] com.netflix.discovery.DiscoveryClient    : Discovery Client initialized at timestamp 1774592033289 with initial instances count: 1
+2026-03-27 08:13:53.297  INFO 13836 --- [restartedMain] o.s.c.n.e.s.EurekaServiceRegistry        : Registering application USER-SERVICE with eureka with status UP
+2026-03-27 08:13:53.299  INFO 13836 --- [restartedMain] com.netflix.discovery.DiscoveryClient    : Saw local status change event StatusChangeEvent [timestamp=1774592033299, current=UP, previous=STARTING]
+2026-03-27 08:13:53.301  WARN 13836 --- [restartedMain] c.n.discovery.InstanceInfoReplicator     : Ignoring onDemand update due to rate limiter
+2026-03-27 08:13:53.361  INFO 13836 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 6101 (http) with context path ''
+2026-03-27 08:13:53.362  INFO 13836 --- [restartedMain] .s.c.n.e.s.EurekaAutoServiceRegistration : Updating port to 6101
+2026-03-27 08:13:53.378  INFO 13836 --- [DiscoveryClient-InstanceInfoReplicator-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_USER-SERVICE/192.168.100.133:User-service:6101: registering service...
+2026-03-27 08:13:53.440  INFO 13836 --- [DiscoveryClient-InstanceInfoReplicator-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_USER-SERVICE/192.168.100.133:User-service:6101 - registration status: 204
+2026-03-27 08:13:53.781  INFO 13836 --- [restartedMain] z.c.f.u.UserServiceApplication           : Started UserServiceApplication in 20.603 seconds (JVM running for 21.614)
+2026-03-27 08:18:53.095  INFO 13836 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2026-03-27 08:23:53.110  INFO 13836 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2026-03-27 08:28:53.120  INFO 13836 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2026-03-27 08:33:53.135  INFO 13836 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2026-03-27 08:36:40.277  INFO 13836 --- [Thread-5] o.s.c.n.e.s.EurekaServiceRegistry        : Unregistering application USER-SERVICE with eureka with status DOWN
+2026-03-27 08:36:40.278  INFO 13836 --- [Thread-5] com.netflix.discovery.DiscoveryClient    : Saw local status change event StatusChangeEvent [timestamp=1774593400278, current=DOWN, previous=UP]
+2026-03-27 08:36:40.349  INFO 13836 --- [Thread-5] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-03-27 08:36:40.355  INFO 13836 --- [Thread-5] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-03-27 08:36:40.373  INFO 13836 --- [Thread-5] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-03-27 08:36:40.378  INFO 13836 --- [DiscoveryClient-InstanceInfoReplicator-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_USER-SERVICE/192.168.100.133:User-service:6101: registering service...
+2026-03-27 08:36:40.379  INFO 13836 --- [Thread-5] com.netflix.discovery.DiscoveryClient    : Shutting down DiscoveryClient ...
+2026-03-27 08:36:40.399  INFO 13836 --- [DiscoveryClient-InstanceInfoReplicator-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_USER-SERVICE/192.168.100.133:User-service:6101 - registration status: 204
+2026-03-27 08:36:40.402  INFO 13836 --- [Thread-5] com.netflix.discovery.DiscoveryClient    : Unregistering ...
+2026-03-27 08:36:40.434  INFO 13836 --- [Thread-5] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_USER-SERVICE/192.168.100.133:User-service:6101 - deregister  status: 200
+2026-03-27 08:36:40.446  INFO 13836 --- [Thread-5] com.netflix.discovery.DiscoveryClient    : Completed shut down of DiscoveryClient
+2026-03-27 08:36:40.976  INFO 13836 --- [restartedMain] z.c.f.u.UserServiceApplication           : Starting UserServiceApplication using Java 17.0.9 on FH-GMhandu1123 with PID 13836 (C:\actual-fml-projects\life-core\insure-me-backend\user-service\target\classes started by GMhandu in C:\actual-fml-projects\life-core\insure-me-backend)
+2026-03-27 08:36:40.976  INFO 13836 --- [restartedMain] z.c.f.u.UserServiceApplication           : The following profiles are active: dev
+2026-03-27 08:36:41.938  INFO 13836 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-03-27 08:36:42.032  INFO 13836 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 92 ms. Found 6 JPA repository interfaces.
+2026-03-27 08:36:42.362  INFO 13836 --- [restartedMain] o.s.cloud.context.scope.GenericScope     : BeanFactory id=46ef0564-5058-3658-99be-a4ddad33a77b
+2026-03-27 08:36:42.460  INFO 13836 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@29a15a11' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2026-03-27 08:36:42.461  INFO 13836 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2026-03-27 08:36:42.697  INFO 13836 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 6101 (http)
+2026-03-27 08:36:42.699  INFO 13836 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-03-27 08:36:42.700  INFO 13836 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.52]
+2026-03-27 08:36:42.826  INFO 13836 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-03-27 08:36:42.827  INFO 13836 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1844 ms
+2026-03-27 08:36:42.968  WARN 13836 --- [restartedMain] o.s.c.openfeign.FeignClientFactoryBean   : The provided URL is empty. Will try picking an instance via load-balancing.
+2026-03-27 08:36:43.129  WARN 13836 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-03-27 08:36:43.215  INFO 13836 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
+2026-03-27 08:36:43.576  INFO 13836 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
+2026-03-27 08:36:44.899  INFO 13836 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-03-27 08:36:44.960  INFO 13836 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2026-03-27 08:36:45.334  INFO 13836 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/'] with []
+2026-03-27 08:36:47.585  INFO 13836 --- [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 18 endpoint(s) beneath base path '/actuator'
+2026-03-27 08:36:47.608  INFO 13836 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@6a963a4e, org.springframework.security.web.context.SecurityContextPersistenceFilter@447708d1, org.springframework.security.web.header.HeaderWriterFilter@7d26388e, org.springframework.web.filter.CorsFilter@656c8fb6, org.springframework.security.web.authentication.logout.LogoutFilter@48642414, zw.co.hcpwebcommons.handler.ExceptionHandlerFilter@40050540, zw.co.hcpwebcommons.security.JWTAuthenticationFilter@50e4cd9a, zw.co.hcpwebcommons.security.JWTAuthenticationFilter@3d788aec, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7803e05f, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@53cf939b, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@75c20917, org.springframework.security.web.session.SessionManagementFilter@3d2b55c2, org.springframework.security.web.access.ExceptionTranslationFilter@530de8a8, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@5743f632]
+2026-03-27 08:36:47.624  WARN 13836 --- [restartedMain] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2026-03-27 08:36:47.624  INFO 13836 --- [restartedMain] c.n.c.sources.URLConfigurationSource     : To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2026-03-27 08:36:48.421  INFO 13836 --- [restartedMain] DiscoveryClientOptionalArgsConfiguration : Eureka HTTP Client uses Jersey
+2026-03-27 08:36:48.468  WARN 13836 --- [restartedMain] iguration$LoadBalancerCaffeineWarnLogger : Spring Cloud LoadBalancer is currently working with the default cache. You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2026-03-27 08:36:48.495  INFO 13836 --- [restartedMain] o.s.c.n.eureka.InstanceInfoFactory       : Setting initial instance status as: STARTING
+2026-03-27 08:36:48.500  INFO 13836 --- [restartedMain] com.netflix.discovery.DiscoveryClient    : Initializing Eureka in region us-east-1
+2026-03-27 08:36:48.505  INFO 13836 --- [restartedMain] c.n.d.provider.DiscoveryJerseyProvider   : Using JSON encoding codec LegacyJacksonJson
+2026-03-27 08:36:48.506  INFO 13836 --- [restartedMain] c.n.d.provider.DiscoveryJerseyProvider   : Using JSON decoding codec LegacyJacksonJson
+2026-03-27 08:36:48.506  INFO 13836 --- [restartedMain] c.n.d.provider.DiscoveryJerseyProvider   : Using XML encoding codec XStreamXml
+2026-03-27 08:36:48.506  INFO 13836 --- [restartedMain] c.n.d.provider.DiscoveryJerseyProvider   : Using XML decoding codec XStreamXml
+2026-03-27 08:36:48.663  INFO 13836 --- [restartedMain] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2026-03-27 08:36:48.667  INFO 13836 --- [restartedMain] com.netflix.discovery.DiscoveryClient    : Disable delta property : false
+2026-03-27 08:36:48.667  INFO 13836 --- [restartedMain] com.netflix.discovery.DiscoveryClient    : Single vip registry refresh property : null
+2026-03-27 08:36:48.667  INFO 13836 --- [restartedMain] com.netflix.discovery.DiscoveryClient    : Force full registry fetch : false
+2026-03-27 08:36:48.667  INFO 13836 --- [restartedMain] com.netflix.discovery.DiscoveryClient    : Application is null : false
+2026-03-27 08:36:48.667  INFO 13836 --- [restartedMain] com.netflix.discovery.DiscoveryClient    : Registered Applications size is zero : true
+2026-03-27 08:36:48.668  INFO 13836 --- [restartedMain] com.netflix.discovery.DiscoveryClient    : Application version is -1: true
+2026-03-27 08:36:48.668  INFO 13836 --- [restartedMain] com.netflix.discovery.DiscoveryClient    : Getting all instance registry info from the eureka server
+2026-03-27 08:36:48.677  INFO 13836 --- [restartedMain] com.netflix.discovery.DiscoveryClient    : The response status is 200
+2026-03-27 08:36:48.679  INFO 13836 --- [restartedMain] com.netflix.discovery.DiscoveryClient    : Starting heartbeat executor: renew interval is: 1
+2026-03-27 08:36:48.680  INFO 13836 --- [restartedMain] c.n.discovery.InstanceInfoReplicator     : InstanceInfoReplicator onDemand update allowed rate per min is 4
+2026-03-27 08:36:48.682  INFO 13836 --- [restartedMain] com.netflix.discovery.DiscoveryClient    : Discovery Client initialized at timestamp 1774593408682 with initial instances count: 2
+2026-03-27 08:36:48.685  INFO 13836 --- [restartedMain] o.s.c.n.e.s.EurekaServiceRegistry        : Registering application USER-SERVICE with eureka with status UP
+2026-03-27 08:36:48.685  INFO 13836 --- [restartedMain] com.netflix.discovery.DiscoveryClient    : Saw local status change event StatusChangeEvent [timestamp=1774593408685, current=UP, previous=STARTING]
+2026-03-27 08:36:48.686  WARN 13836 --- [restartedMain] c.n.discovery.InstanceInfoReplicator     : Ignoring onDemand update due to rate limiter
+2026-03-27 08:36:48.701  INFO 13836 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 6101 (http) with context path ''
+2026-03-27 08:36:48.702  INFO 13836 --- [restartedMain] .s.c.n.e.s.EurekaAutoServiceRegistration : Updating port to 6101
+2026-03-27 08:36:48.739  INFO 13836 --- [DiscoveryClient-InstanceInfoReplicator-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_USER-SERVICE/192.168.100.133:User-service:6101: registering service...
+2026-03-27 08:36:48.770  INFO 13836 --- [DiscoveryClient-InstanceInfoReplicator-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_USER-SERVICE/192.168.100.133:User-service:6101 - registration status: 204
+2026-03-27 08:36:49.365  INFO 13836 --- [restartedMain] z.c.f.u.UserServiceApplication           : Started UserServiceApplication in 8.846 seconds (JVM running for 1397.209)
+2026-03-27 08:36:49.368  INFO 13836 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2026-03-27 08:41:48.670  INFO 13836 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2026-03-27 08:46:48.645  INFO 13836 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2026-03-27 08:51:48.626  INFO 13836 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2026-03-27 08:56:48.621  INFO 13836 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration

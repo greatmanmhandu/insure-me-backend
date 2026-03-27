@@ -11,10 +11,11 @@
         <module name="life-web-core" />
         <module name="pointstracker-web-core" />
         <module name="life-web-form" />
-        <module name="life-web-form-dashboard" />
         <module name="user-service" />
+        <module name="premium-receipting" />
         <module name="health-service-web-core" />
         <module name="microfinance-web-core" />
+        <module name="new-business" />
         <module name="health-web-core" />
         <module name="hcp-web-core" />
         <module name="hcp-web-commons" />
@@ -34,9 +35,10 @@
       <module name="health-web-core" options="-parameters" />
       <module name="life-web-core" options="-parameters" />
       <module name="life-web-form" options="-parameters" />
-      <module name="life-web-form-dashboard" options="-parameters" />
       <module name="microfinance-web-core" options="-parameters" />
+      <module name="new-business" options="-parameters" />
       <module name="pointstracker-web-core" options="-parameters" />
+      <module name="premium-receipting" options="-parameters" />
       <module name="registry" options="-parameters" />
       <module name="user-service" options="-parameters" />
     </option>

@@ -6,8 +6,8 @@ info:
 eureka:
   client:
     service-url:
-#     defaultZone: http://localhost:6761/eureka/
-      defaultZone: http://web-registry-service:6761/eureka/
+     defaultZone: http://localhost:6761/eureka/
+#      defaultZone: http://web-registry-service:6761/eureka/
     healthcheck:
       enabled: 'true'
     fetch-registry: 'true'
