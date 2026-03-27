@@ -1,0 +1,24 @@
+#spring:
+#  application:
+#    name: cash-collection
+#  profiles:
+#    active: prod
+#
+#product:
+#  name: FMH
+#
+#server:
+#  port: 9090
+#  mvc:
+#    pathpattern:
+#      matching-strategy: ant_path_matcher
+#
+#  h2:
+#    console:
+#      enabled: true
+#      path: /h2-console
+#  datasource:
+#    url: jdbc:h2:mem:testdb
+#    driverClassName: org.h2.Driver
+#    username: sa
+#    password:

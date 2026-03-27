@@ -49,9 +49,12 @@ public class PolicyHolderController {
 
 
     @GetMapping("getAllPolicyHolders")
-    ResponseEntity<BaseResult> getAllPolicyHolders ()
+    ResponseEntity<BaseResult> getAllPolicyHolders (
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "15") int size
+    )
     {
-        return policyHolderService.getAllPolicyHolders();
+        return policyHolderService.getAllPolicyHolders(page, size);
     }
 
 

@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 
 public interface PolicyHolderService {
 
-    ResponseEntity<BaseResult> getAllPolicyHolders();
+    ResponseEntity<BaseResult> getAllPolicyHolders(int page, int size);
 
 
 

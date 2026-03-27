@@ -6,6 +6,10 @@ import zw.co.firstmutual.premiumreceipting.dashboard_and_mobile.payload.request.
 import zw.co.firstmutual.premiumreceipting.dashboard_and_mobile.repository.PolicyHolderRepository;
 import zw.co.firstmutual.premiumreceipting.dashboard_and_mobile.service.PolicyHolderService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -20,8 +24,18 @@ public class PolicyHolderServiceImpl implements PolicyHolderService {
 
 
     @Override
-    public ResponseEntity<BaseResult> getAllPolicyHolders() {
-        return ResponseEntity.ok(new BaseResult(policyHolderRepository.findAll(), "policy holders fetched successfully","00",200));
+    public ResponseEntity<BaseResult> getAllPolicyHolders(int page, int size) {
+        // Fetching only requested page from DB (Database-level pagination)
+        Pageable pageable = PageRequest.of(page, size, Sort.by("id").descending());
+        Page<PolicyHolder> policyHoldersPage = policyHolderRepository.findAll(pageable);
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("content", policyHoldersPage.getContent());
+        response.put("currentPage", policyHoldersPage.getNumber());
+        response.put("totalItems", policyHoldersPage.getTotalElements());
+        response.put("totalPages", policyHoldersPage.getTotalPages());
+
+        return ResponseEntity.ok(new BaseResult(response, "policy holders fetched successfully", "00", 200));
     }
 
 
