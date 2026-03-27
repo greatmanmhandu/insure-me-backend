@@ -2,6 +2,8 @@ package zw.co.lifewebcore.domain.service;
 
 import zw.co.lifewebcore.domain.dto.GenericParentDto;
 import zw.co.lifewebcore.domain.dto.GenericParentImbaDto;
+import zw.co.lifewebcore.domain.dto.SavingsGroupedDto;
+import zw.co.lifewebcore.domain.dto.AlterationFuneralGroupedDto;
 import zw.co.lifewebcore.domain.dto.ConversionFuneralGroupedDto;
 import zw.co.lifewebcore.domain.dto.GenericParentMombeDto;
 import zw.co.lifewebcore.domain.dto.NewBusinessFuneralGroupedDto;
@@ -31,11 +33,19 @@ public interface FormsService {
 
     CompletableFuture<List<AlterationFormForfuneral>> getAlterationFormForfuneral(String startDate,String endDate);
 
+    CompletableFuture<List<AlterationFuneralGroupedDto>> getGroupedAlterationFormForfuneral(String startDate, String endDate);
+
     CompletableFuture<List<SavingsFormForConversion>> getSavingsFormForConversion(String startDate,String endDate);
+
+    CompletableFuture<List<SavingsGroupedDto<SavingsFormForConversion>>> getGroupedSavingsFormForConversion(String startDate, String endDate);
 
     CompletableFuture<List<SavingsFormForAlteration>> getSavingsFormForAlteration(String startDate,String endDate);
 
+    CompletableFuture<List<SavingsGroupedDto<SavingsFormForAlteration>>> getGroupedSavingsFormForAlteration(String startDate, String endDate);
+
     CompletableFuture<List<NewbusinessForSavings>> getNewbusinessForSavings(String startDate,String endDate);
+
+    CompletableFuture<List<SavingsGroupedDto<NewbusinessForSavings>>> getGroupedNewbusinessForSavings(String startDate, String endDate);
 
     CompletableFuture<List<ConversionForFuneralProducts>> getConversionForFuneralProducts(String startDate,String endDate);
 

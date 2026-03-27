@@ -768,6 +768,217 @@ public NewBusinessFuneralForEfmlandELP saveNewBusinessFuneralForEfmlandELPServic
         return CompletableFuture.completedFuture(result);
     }
 
+    @Async
+    @Override
+    public CompletableFuture<List<AlterationFuneralGroupedDto>> getGroupedAlterationFormForfuneral(String startDateStr, String endDateStr) {
+        Instant startDate = parseToInstant(startDateStr, true);
+        Instant endDate = parseToInstant(endDateStr, false);
+        List<AlterationFormForfuneral> allData =
+                alterationFormForfuneralRepository.findByCreatedDateBetweenOrderByIdAsc(startDate, endDate);
+
+        // Group by linkName AND createdDate (truncated to seconds)
+        Map<String, List<AlterationFormForfuneral>> groupedData = allData.stream()
+                .filter(record -> record.getLinkName() != null && !record.getLinkName().isEmpty())
+                .collect(Collectors.groupingBy(record -> {
+                    long epochSecond = record.getCreatedDate().getEpochSecond();
+                    return record.getLinkName() + "_" + epochSecond;
+                }));
+
+        List<AlterationFuneralGroupedDto> result = new ArrayList<>();
+        Set<Long> processedIds = new HashSet<>();
+
+        groupedData.forEach((key, records) -> {
+            // Find main record
+            AlterationFormForfuneral mainRecord = records.stream()
+                    .filter(r -> r.getMobile() != null && !r.getMobile().isEmpty())
+                    .filter(r -> "SELF".equalsIgnoreCase(r.getRelationShip()))
+                    .findFirst()
+                    .orElse(records.stream()
+                            .filter(r -> r.getMobile() != null && !r.getMobile().isEmpty())
+                            .findFirst()
+                            .orElse(records.get(0)));
+
+            List<AlterationFormForfuneral> dependants = records.stream()
+                    .filter(r -> r.getId() != mainRecord.getId())
+                    .collect(Collectors.toList());
+
+            result.add(AlterationFuneralGroupedDto.builder()
+                    .mainRecord(mainRecord)
+                    .dependants(dependants)
+                    .build());
+            
+            records.forEach(r -> processedIds.add(r.getId()));
+        });
+
+        // Handle records without linkName or not processed
+        allData.stream()
+                .filter(record -> !processedIds.contains(record.getId()))
+                .forEach(record -> {
+                    result.add(AlterationFuneralGroupedDto.builder()
+                            .mainRecord(record)
+                            .dependants(new ArrayList<>())
+                            .build());
+                });
+
+        return CompletableFuture.completedFuture(result);
+    }
+
+    @Async
+    @Override
+    public CompletableFuture<List<SavingsGroupedDto<NewbusinessForSavings>>> getGroupedNewbusinessForSavings(String startDateStr, String endDateStr) {
+        Instant startDate = parseToInstant(startDateStr, true);
+        Instant endDate = parseToInstant(endDateStr, false);
+        List<NewbusinessForSavings> allData =
+                newbusinessForSavingsRepository.findByCreatedDateBetweenOrderByIdAsc(startDate, endDate);
+
+        Map<String, List<NewbusinessForSavings>> groupedData = allData.stream()
+                .filter(record -> record.getLinkName() != null && !record.getLinkName().isEmpty())
+                .collect(Collectors.groupingBy(record -> {
+                    long epochSecond = record.getCreatedDate().getEpochSecond();
+                    return record.getLinkName() + "_" + epochSecond;
+                }));
+
+        List<SavingsGroupedDto<NewbusinessForSavings>> result = new ArrayList<>();
+        Set<Long> processedIds = new HashSet<>();
+
+        groupedData.forEach((key, records) -> {
+            NewbusinessForSavings mainRecord = records.stream()
+                    .filter(r -> r.getMobile() != null && !r.getMobile().isEmpty())
+                    .filter(r -> "SELF".equalsIgnoreCase(r.getRelationShip()))
+                    .findFirst()
+                    .orElse(records.stream()
+                            .filter(r -> r.getMobile() != null && !r.getMobile().isEmpty())
+                            .findFirst()
+                            .orElse(records.get(0)));
+
+            List<NewbusinessForSavings> dependants = records.stream()
+                    .filter(r -> r.getId() != mainRecord.getId())
+                    .collect(Collectors.toList());
+
+            result.add(SavingsGroupedDto.<NewbusinessForSavings>builder()
+                    .mainRecord(mainRecord)
+                    .dependants(dependants)
+                    .build());
+            
+            records.forEach(r -> processedIds.add(r.getId()));
+        });
+
+        allData.stream()
+                .filter(record -> !processedIds.contains(record.getId()))
+                .forEach(record -> {
+                    result.add(SavingsGroupedDto.<NewbusinessForSavings>builder()
+                            .mainRecord(record)
+                            .dependants(new ArrayList<>())
+                            .build());
+                });
+
+        return CompletableFuture.completedFuture(result);
+    }
+
+    @Async
+    @Override
+    public CompletableFuture<List<SavingsGroupedDto<SavingsFormForConversion>>> getGroupedSavingsFormForConversion(String startDateStr, String endDateStr) {
+        Instant startDate = parseToInstant(startDateStr, true);
+        Instant endDate = parseToInstant(endDateStr, false);
+        List<SavingsFormForConversion> allData =
+                savingsFormForConversionRepository.findByCreatedDateBetweenOrderByIdAsc(startDate, endDate);
+
+        Map<String, List<SavingsFormForConversion>> groupedData = allData.stream()
+                .filter(record -> record.getLinkName() != null && !record.getLinkName().isEmpty())
+                .collect(Collectors.groupingBy(record -> {
+                    long epochSecond = record.getCreatedDate().getEpochSecond();
+                    return record.getLinkName() + "_" + epochSecond;
+                }));
+
+        List<SavingsGroupedDto<SavingsFormForConversion>> result = new ArrayList<>();
+        Set<Long> processedIds = new HashSet<>();
+
+        groupedData.forEach((key, records) -> {
+            SavingsFormForConversion mainRecord = records.stream()
+                    .filter(r -> r.getMobile() != null && !r.getMobile().isEmpty())
+                    .filter(r -> "SELF".equalsIgnoreCase(r.getRelationShip()))
+                    .findFirst()
+                    .orElse(records.stream()
+                            .filter(r -> r.getMobile() != null && !r.getMobile().isEmpty())
+                            .findFirst()
+                            .orElse(records.get(0)));
+
+            List<SavingsFormForConversion> dependants = records.stream()
+                    .filter(r -> r.getId() != mainRecord.getId())
+                    .collect(Collectors.toList());
+
+            result.add(SavingsGroupedDto.<SavingsFormForConversion>builder()
+                    .mainRecord(mainRecord)
+                    .dependants(dependants)
+                    .build());
+            
+            records.forEach(r -> processedIds.add(r.getId()));
+        });
+
+        allData.stream()
+                .filter(record -> !processedIds.contains(record.getId()))
+                .forEach(record -> {
+                    result.add(SavingsGroupedDto.<SavingsFormForConversion>builder()
+                            .mainRecord(record)
+                            .dependants(new ArrayList<>())
+                            .build());
+                });
+
+        return CompletableFuture.completedFuture(result);
+    }
+
+    @Async
+    @Override
+    public CompletableFuture<List<SavingsGroupedDto<SavingsFormForAlteration>>> getGroupedSavingsFormForAlteration(String startDateStr, String endDateStr) {
+        Instant startDate = parseToInstant(startDateStr, true);
+        Instant endDate = parseToInstant(endDateStr, false);
+        List<SavingsFormForAlteration> allData =
+                savingsFormForAlterationRepository.findByCreatedDateBetweenOrderByIdAsc(startDate, endDate);
+
+        Map<String, List<SavingsFormForAlteration>> groupedData = allData.stream()
+                .filter(record -> record.getLinkName() != null && !record.getLinkName().isEmpty())
+                .collect(Collectors.groupingBy(record -> {
+                    long epochSecond = record.getCreatedDate().getEpochSecond();
+                    return record.getLinkName() + "_" + epochSecond;
+                }));
+
+        List<SavingsGroupedDto<SavingsFormForAlteration>> result = new ArrayList<>();
+        Set<Long> processedIds = new HashSet<>();
+
+        groupedData.forEach((key, records) -> {
+            SavingsFormForAlteration mainRecord = records.stream()
+                    .filter(r -> r.getMobile() != null && !r.getMobile().isEmpty())
+                    .filter(r -> "SELF".equalsIgnoreCase(r.getRelationShip()))
+                    .findFirst()
+                    .orElse(records.stream()
+                            .filter(r -> r.getMobile() != null && !r.getMobile().isEmpty())
+                            .findFirst()
+                            .orElse(records.get(0)));
+
+            List<SavingsFormForAlteration> dependants = records.stream()
+                    .filter(r -> r.getId() != mainRecord.getId())
+                    .collect(Collectors.toList());
+
+            result.add(SavingsGroupedDto.<SavingsFormForAlteration>builder()
+                    .mainRecord(mainRecord)
+                    .dependants(dependants)
+                    .build());
+            
+            records.forEach(r -> processedIds.add(r.getId()));
+        });
+
+        allData.stream()
+                .filter(record -> !processedIds.contains(record.getId()))
+                .forEach(record -> {
+                    result.add(SavingsGroupedDto.<SavingsFormForAlteration>builder()
+                            .mainRecord(record)
+                            .dependants(new ArrayList<>())
+                            .build());
+                });
+
+        return CompletableFuture.completedFuture(result);
+    }
+
     public Instant parseToInstant(String dateStr, boolean startOfDay) {
         try {
             // Try to parse as LocalDate
